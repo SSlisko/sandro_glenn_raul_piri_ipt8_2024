@@ -1,6 +1,6 @@
 ## Ideen
 
-- Kioskapp mit anderen Technologien entwickeln und weiterführen
+- **Kioskapp mit anderen Technologien entwickeln und weiterführen**
 - Blackjack Online Spiel
 - Simple Habitapp
 
