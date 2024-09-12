@@ -60,14 +60,17 @@ body {
 
 /* Card Styling */
 .card {
-  width: 20%;
-  background-color: white;
-  border-radius: 10px;
+  width: 22%;
+
+  
+  background: linear-gradient(135deg, rgb(151, 151, 151) 0%, rgb(255, 255, 255) 100%);
+  border-radius: 15px;
   overflow: hidden;
   color: black;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-  padding: 10px;
-  border: 1px solid #858585;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.4s ease-in-out, box-shadow 0.4s ease-in-out;
+  border: 1px solid #eaeaea;
+  cursor: pointer;
 }
 
 .card-image {
@@ -88,26 +91,47 @@ body {
 }
 
 .card-body {
-  padding: 10px;
+  padding: 15px;
 }
 
 .card-title {
-  color: black;
-  font-size: 1.2rem;
   margin-bottom: 5%;
   font-weight: 600;
+  font-size: 1.3rem;
+  color: rgb(0, 0, 0);
 }
 
 .card-price {
-  color: #000000;
-  font-size: 150%;
-  font-weight: bold;
   margin-bottom: 10%;
+  color: #28a745;
+  font-size: 1.5rem;
+  font-weight: bold;
 }
 
 .card-ingredients {
-  color: #777;
+  color: rgb(0, 0, 0);
   font-size: 0.9rem;
   margin-bottom: 10%;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+.card-mehr:hover {
+  text-decoration: underline;
+}
+
+.add-to-cart {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border-radius: 25px;
+  transition: background-color 0.3s ease;
+}
+
+.add-to-cart:hover {
+  background-color: #0056b3;
 }
 </style>
