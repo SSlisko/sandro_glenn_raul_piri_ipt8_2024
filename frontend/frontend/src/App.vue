@@ -1,5 +1,5 @@
 <script setup>
-import HelloWorld from './components/HelloWorld.vue'
+
 </script>
 
 <template>
@@ -18,7 +18,7 @@ import HelloWorld from './components/HelloWorld.vue'
           Image
         </div>
         <div class="card-body">
-          <h5 class="card-title">Card {{ n }}</h5>
+          <h5 class="card-title">{{ n }}</h5>
           <p class="card-price">0.00 CHF</p>
           <p class="card-ingredients" id="card-ingredients">Lorem ipsum dolor sit amet consectetur, adipisicing elit...</p>
           <p class="card-mehr" id="card-mehr">Mehr...</p>
@@ -38,88 +38,72 @@ import HelloWorld from './components/HelloWorld.vue'
 body {
   display: flex;
   justify-content: center;
-  align-items: center;
-  height: 70vh;
-  background-color: #2e2e2e;
+  height: 100vh;
+  background-color: #f8f9fa;
   font-family: Arial, sans-serif;
   padding: 2%;
-}
-
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #42b883aa);
 }
 
 /* Card Container Styling */
 .card-container {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
-  gap: 20px;
-  margin-top: 20px;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 20px; /* Spacing between the cards */
+  margin-top: 30px; /* Top margin */
 }
 
 /* Card Styling */
 .card {
-  width: calc(25% - 20px); /* Four cards per row with space between */
-  background-color: #1c1c1c;
+  width: 20%;
+  background-color: white;
   border-radius: 10px;
   overflow: hidden;
-  color: white;
-  padding: 20px;
+  color: black;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+  border: 1px solid #eaeaea;
 }
 
 .card-image {
   width: 100%;
-  height: 20vh;
+  height: 150px;
   background-color: #a0a0a0;
   display: flex;
   justify-content: center;
   align-items: center;
-  color: white;
-  font-size: 5vw;
+  overflow: hidden;
+  border-radius: 10px 10px 0 0;
+}
+
+.card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .card-body {
-  padding: 5%;
+  padding: 10px;
 }
 
 .card-title {
-  color: white;
-  font-size: 1.8rem;
+  color: black;
+  font-size: 1.2rem;
   margin-bottom: 5%;
+  font-weight: 600;
 }
 
 .card-price {
-  color: #dcdcdc;
-  font-size: 1rem;
+  color: #555;
+  font-size: 150%;
   font-weight: bold;
   margin-bottom: 10%;
 }
 
 .card-ingredients {
-  color: #dcdcdc;
-  font-size: 1rem;
+  color: #777;
+  font-size: 0.9rem;
   margin-bottom: 10%;
-}
-
-.card-mehr {
-  color: #007bff;
-  cursor: pointer;
-  text-decoration: underline;
-}
-
-.card-mehr:hover {
-  background-color: #0056b3;
 }
 </style>
