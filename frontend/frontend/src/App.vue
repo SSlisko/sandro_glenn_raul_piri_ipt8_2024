@@ -1,5 +1,8 @@
 <script setup>
 
+function addToCart() {
+
+}
 </script>
 
 <template>
@@ -12,19 +15,20 @@
     </a>
     
     <!-- Card Container -->
-    <div class="card-container">
-      <div class="card" v-for="n in 8" :key="n">
-        <div class="card-image">
-          Image
-        </div>
-        <div class="card-body">
-          <h5 class="card-title">{{ n }}</h5>
-          <p class="card-price">0.00 CHF</p>
-          <p class="card-ingredients" id="card-ingredients">Lorem ipsum dolor sit amet consectetur, adipisicing elit...</p>
-          <p class="card-mehr" id="card-mehr">Mehr...</p>
+      <div class="card-container">
+        <div class="card" v-for="n in 8" :key="n">
+            <div class="card-image" @click="addToCart">
+              Image
+          </div>
+            <div class="card-body">
+              <h5 class="card-title">{{ n }}</h5>
+              <p class="card-price">0.00 CHF</p>
+              <p class="card-ingredients" id="card-ingredients">Lorem ipsum dolor sit amet consectetur, adipisicing elit...</p>
+              <p class="card-mehr" id="card-mehr">Mehr...</p>
+            </div>
         </div>
       </div>
-    </div>
+
   </div>
 </template>
 
@@ -50,8 +54,8 @@ body {
   flex-wrap: wrap;
   justify-content: flex-start;
   align-items: flex-start;
-  gap: 20px; /* Spacing between the cards */
-  margin-top: 30px; /* Top margin */
+  gap: 30px; /* Spacing between the cards */
+  margin-top: 20%; /* Top margin */
 }
 
 /* Card Styling */
@@ -63,13 +67,13 @@ body {
   color: black;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
   padding: 10px;
-  border: 1px solid #eaeaea;
+  border: 1px solid #858585;
 }
 
 .card-image {
   width: 100%;
   height: 150px;
-  background-color: #a0a0a0;
+  background-color: #ee3737;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -95,7 +99,7 @@ body {
 }
 
 .card-price {
-  color: #555;
+  color: #000000;
   font-size: 150%;
   font-weight: bold;
   margin-bottom: 10%;
