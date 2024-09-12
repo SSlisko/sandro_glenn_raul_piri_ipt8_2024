@@ -13,4 +13,5 @@ class Product extends Model
         return $this->belongsTo(Category::class);
     }
     protected $fillable = ['name', 'price','description' , 'ingredients','image' , 'category_id'];
+    protected $hidden = ['id', 'created_at', 'updated_at', 'category_id'];
 }
