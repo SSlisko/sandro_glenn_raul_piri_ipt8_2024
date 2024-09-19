@@ -1,19 +1,94 @@
 <script setup>
-function addToCart() {
-  // Add your logic here
-}
-
 import { ref } from 'vue';
+
+// Datenarray mit Name, Preis, Beschreibung und Bild
+const products = ref([
+  {
+    name: 'Wasser',
+    price: '1.00 CHF',
+    description: 'Ein frisches kaltes Wasser von natürlicher Quelle.',
+    image: 'https://via.placeholder.com/150'
+  },
+  {
+    name: 'Lasagne',
+    price: '20.00 CHF',
+    description: 'Leckere Lasagne von Mamas Rezept, hausgemacht.',
+    image: 'https://via.placeholder.com/150'
+  },
+  {
+    name: 'Pizza Margherita',
+    price: '15.00 CHF',
+    description: 'Eine klassische italienische Pizza mit Tomaten und Mozzarella.',
+    image: 'https://via.placeholder.com/150'
+  },
+  {
+    name: 'Caesar Salat',
+    price: '12.00 CHF',
+    description: 'Frischer Salat mit gegrilltem Hähnchen, Croutons und Caesar-Dressing.',
+    image: 'https://via.placeholder.com/150'
+  },
+  {
+    name: 'Apfelsaft',
+    price: '2.50 CHF',
+    description: 'Natürlich gepresster Apfelsaft ohne Zuckerzusatz.',
+    image: 'https://via.placeholder.com/150'
+  },
+  {
+    name: 'Rindersteak',
+    price: '30.00 CHF',
+    description: 'Ein saftiges Rindersteak, perfekt medium-rare gegrillt.',
+    image: 'https://www.koch-mit.de/app/uploads/2023/06/Rindersteak.jpg'
+  },
+  {
+    name: 'Schokoladenkuchen',
+    price: '6.00 CHF',
+    description: 'Ein reichhaltiger Schokoladenkuchen mit cremiger Füllung.',
+    image: 'https://www.wildeisen.ch/sites/default/files/files/2014-12/bild_4797.jpg'
+  },
+  {
+    name: 'Club Sandwich',
+    price: '8.50 CHF',
+    description: 'Ein Sandwich mit Hähnchen, Speck, Salat und Mayonnaise.',
+    image: 'https://api.swissmilk.ch/wp-content/uploads/2019/10/SM2018_CHDO_32_Club_Sandwich_mit_BBQ-Sauce-2560x1707.jpg'
+  },
+  {
+    name: 'Eiskaffee',
+    price: '4.00 CHF',
+    description: 'Kalter Kaffee mit Vanilleeis und Sahne.',
+    image: 'https://www.nespresso.com/ncp/res/uploads/recipes/Veganer%20Wiener%20Eiskaffee%20Rezept%20Nespresso%20%C3%96sterreich.jpg-1.png'
+  },
+  {
+    name: 'Sushi Platte',
+    price: '25.00 CHF',
+    description: 'Eine Auswahl an frischem Sushi mit Lachs, Thunfisch und Avocado.',
+    image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR5ABHEo2r-oS6oocxPk6vbAtbHlSjwEbfLUQ&s'
+  },
+  {
+    name: 'Spaghetti Carbonara',
+    price: '14.00 CHF',
+    description: 'Traditionelle Spaghetti Carbonara mit Speck und Ei.',
+    image: 'https://cdn.gutekueche.de/media/recipe/26142/spaghetti-carbonara.jpg'
+  },
+  {
+    name: 'Erdbeer-Smoothie',
+    price: '5.00 CHF',
+    description: 'Ein fruchtiger Smoothie mit frischen Erdbeeren und Joghurt.',
+    image: 'https://gesund-macht-schlank.de/wp-content/uploads/2021/08/strawberry-smoothie.jpg'
+  }
+]);
 
 const selectedCategory = ref('Alle');
 
+function addToCart(product) {
+  console.log(`${product.name} wurde dem Warenkorb hinzugefügt.`);
+}
 </script>
 
 <template>
   <div class="container">
 
-     <!-- Filter Dropdown -->
-     <div class="filter-container">
+    <!-- Filter Dropdown -->
+    <div class="filter-container">
       <label for="category-filter" class="filter-label">Filter nach Kategorie:</label>
       <select id="category-filter" v-model="selectedCategory">
         <option value="Alle">Alle</option>
@@ -27,14 +102,14 @@ const selectedCategory = ref('Alle');
     
     <!-- Card Container -->
     <div class="card-container">
-      <div class="card" v-for="n in 50" :key="n">
-        <div class="card-image" @click="addToCart">
-          Image
+      <div class="card" v-for="product in products" :key="product.name">
+        <div class="card-image" @click="addToCart(product)">
+          <img :src="product.image" alt="product image">
         </div>
         <div class="card-body">
-          <h5 class="card-title">{{ n }}</h5>
-          <p class="card-price">0.00 CHF</p>
-          <p class="card-ingredients">Lorem ipsum dolor sit amet consectetur, adipisicing elit...</p>
+          <h5 class="card-title">{{ product.name }}</h5>
+          <p class="card-price">{{ product.price }}</p>
+          <p class="card-ingredients">{{ product.description }}</p>
           <p class="card-mehr">Mehr...</p>
         </div>
       </div>
@@ -50,7 +125,7 @@ const selectedCategory = ref('Alle');
 }
 
 .container {
-  margin-top: 110%;
+  margin-top: 110%; /* temporary fix */
 }
 
 body {
@@ -126,7 +201,7 @@ body {
 /* Slimmer Card Image Styling */
 .card-image {
   height: 120px; /* Adjusted height for slimmer cards */
-  background-color: #ee3737;
+  background-color: #5e5e5e;
   display: flex;
   justify-content: center;
   align-items: center;
