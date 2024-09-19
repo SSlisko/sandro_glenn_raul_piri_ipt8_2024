@@ -27,7 +27,7 @@ const selectedCategory = ref('Alle');
     
     <!-- Card Container -->
     <div class="card-container">
-      <div class="card" v-for="n in 9" :key="n">
+      <div class="card" v-for="n in 50" :key="n">
         <div class="card-image" @click="addToCart">
           Image
         </div>
@@ -49,6 +49,10 @@ const selectedCategory = ref('Alle');
   box-sizing: border-box;
 }
 
+.container {
+  margin-top: 110%;
+}
+
 body {
   display: flex;
   justify-content: center;
@@ -56,6 +60,7 @@ body {
   background-color: #f8f9fa;
   font-family: Arial, sans-serif;
   padding: 2%;
+  overflow-y: auto;
 }
 
 /* Filter Container Styling */
@@ -84,17 +89,28 @@ body {
 .card-container {
   display: flex;
   flex-wrap: wrap;
-  gap: 20px; /* Spacing between the cards */
+  gap: 20px; 
   padding: 20px;
-  max-width: 75vw; /* Occupy 3/4 of the viewport width */
-  margin-top: 20px; /* Space on top for phones */
-  align-items: flex-start; /* Align cards to the top */
+  max-width: 75vw;
+  margin-top: 20px; 
+  align-items: flex-start; 
 }
+
+@media (max-width: 768px) {
+  /* For tablets and smaller devices */
+  .card-container {
+    margin-top: 20px;
+    max-width: 75vw;
+    margin-right: 0;
+    justify-content: center;
+  }
+}
+
 
 /* Card Styling */
 .card {
-  width: 275px; /* Fixed width for consistency */
-  height: 325px; /* Fixed height for consistency */
+  width: 275px;
+  height: 325px;
   background-color: white;
   border-radius: 15px;
   overflow: hidden;
@@ -172,38 +188,38 @@ body {
 @media (max-width: 768px) {
   /* For tablets and smaller devices */
   .card-container {
-    margin-top: 60px; /* Space on top for additional content */
-    max-width: 75vw; /* Maintain 3/4 of the viewport width */
-    margin-right: 0; /* Reset margin on smaller screens */
-    justify-content: center; /* Center cards horizontally */
+    margin-top: 60px;
+    max-width: 75vw;
+    margin-right: 0;
+    justify-content: center;
   }
 
   .card {
-    width: 180px; /* Adjusted width for smaller screens */
-    height: 270px; /* Adjusted height for smaller screens */
+    width: 180px;
+    height: 270px;
   }
 
   .card-image {
-    height: 100px; /* Adjust height for smaller screens */
+    height: 100px;
   }
 }
 
 @media (max-width: 480px) {
   /* For very small screens */
   .card-container {
-    margin-top: 2750px; /* More space on top for additional content */
-    max-width: 75vw; /* Maintain 3/4 of the viewport width */
-    margin-right: 0; /* Reset margin on very small screens */
-    justify-content: center; /* Center cards horizontally */
+    margin-top: 2750px;
+    max-width: 75vw;
+    margin-right: 0;
+    justify-content: center;
   }
 
   .card {
-    width: 275px; /* Adjusted width for very small screens */
-    height: 325px; /* Adjusted height for very small screens */
+    width: 275px;
+    height: 325px;
   }
 
   .card-image {
-    height: 80px; /* Adjust height for very small screens */
+    height: 80px;
   }
 }
 </style>
