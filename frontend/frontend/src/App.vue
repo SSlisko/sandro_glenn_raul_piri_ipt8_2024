@@ -1,18 +1,29 @@
 <script setup>
 
 function addToCart() {
-
 }
+
+import { ref } from 'vue';
+
+const selectedCategory = ref('Alle');
+
 </script>
 
 <template>
   <div class="container">
-    <a href="https://vitejs.dev" target="_blank">
-      <img src="/vite.svg" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://vuejs.org/" target="_blank">
-      <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
-    </a>
+
+     <!-- Filter Dropdown -->
+     <div class="filter-container">
+      <label for="category-filter" class="filter-label">Filter nach Kategorie:</label>
+      <select id="category-filter" v-model="selectedCategory">
+        <option value="Alle">Alle</option>
+        <option value="Getränke">Getränke</option>
+        <option value="Softdrinks">Softdrinks</option>
+        <option value="Vorspeisen">Vorspeisen</option>
+        <option value="Hauptspeisen">Hauptspeisen</option>
+        <option value="Desserts">Desserts</option>
+      </select>
+    </div>
     
     <!-- Card Container -->
       <div class="card-container">
@@ -48,6 +59,28 @@ body {
   padding: 2%;
 }
 
+/* Filter Container Styling */
+.filter-container {
+  margin-bottom: 20px;
+}
+
+#category-filter {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  font-size: 2.5rem;
+  width: 350px;
+  height: 90px;
+}
+
+.filter-label {
+  color: #ffffff;
+  font-size: 1rem;
+  font-weight: bold;
+  margin-right: 25px;
+  font-size: 3rem;
+}
+
 /* Card Container Styling */
 .card-container {
   display: flex;
@@ -55,7 +88,7 @@ body {
   justify-content: flex-start;
   align-items: flex-start;
   gap: 30px; /* Spacing between the cards */
-  margin-top: 20%; /* Top margin */
+  margin-top: 5%; 
 }
 
 /* Card Styling */
