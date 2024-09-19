@@ -1,0 +1,66 @@
+services:
+
+  # Laravel Backend (PHP and Nginx)
+  backend:  
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    container_name: laravel-backend
+    working_dir: /var/www/backend
+    ports:
+      - "3308:3306"
+    volumes:
+      - ../backend:/var/www/backend
+    networks:
+      - laravel
+    depends_on:
+      - mysql
+
+  # # Nginx Web Server
+  # webserver:
+  #   image: nginx:alpine
+  #   container_name: laravel-webserver
+  #   ports:
+  #     - "8080:80"
+  #   volumes:
+  #     - ../backend:/var/www/backend
+  #     - ./nginx/conf.d:/etc/nginx/conf.d
+  #   depends_on:
+  #     - backend
+  #   networks:
+  #     - laravel
+
+  # MySQL Database
+  mysql:
+    image: mysql:8.0
+    container_name: laravel-mysql
+    environment:
+      MYSQL_DATABASE: kiosk
+      MYSQL_ROOT_PASSWORD: Sursee6210
+    ports:
+      - "3308:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - laravel
+  
+  # # Vite + Vue Frontend
+  # frontend:
+  #   build:
+  #     context: .
+  #     dockerfile: Dockerfile
+  #   container_name: vue-frontend
+  #   ports:
+  #     - "5000:5000"
+  #   volumes:
+  #     - ../frontend:/app
+  #   networks:
+  #     - laravel
+
+networks:
+  laravel:
+    driver: bridge
+
+volumes:
+  mysql_data:
+    driver: local
