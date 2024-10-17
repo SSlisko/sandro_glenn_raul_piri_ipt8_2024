@@ -31,27 +31,30 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 1000; /* Ensures modal appears above all content */
+  z-index: 1000;
 }
 
 .modal-content {
   background: white;
   padding: 20px;
   border-radius: 8px;
-  width: 450px; /* Adjust width as needed */
+  width: 450px;
   text-align: center;
 }
 
 .modal-content h5 {
   margin-bottom: 10px;
+  font-size: xx-large;
 }
 
 .modal-content p {
   margin-bottom: 20px;
+  font-size: large;
 }
 
 .modal-content button {
   padding: 10px 20px;
+  font-size: large;
   border: none;
   background-color: #007bff;
   color: white;
@@ -60,6 +63,6 @@ export default {
 }
 
 .modal-content button:hover {
-  background-color: #0056b3; /* Darker shade on hover */
+  background-color: #0056b3;
 }
 </style>
