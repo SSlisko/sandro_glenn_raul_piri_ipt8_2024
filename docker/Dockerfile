@@ -1,19 +1,13 @@
-# Use the official PHP image
-FROM php:8.1-fpm
+FROM bitnami/laravel:latest
 
-# Install system dependencies and PHP extensions
-RUN apt-get update && apt-get install -y libpng-dev libjpeg-dev libfreetype6-dev libzip-dev \
-    && docker-php-ext-configure gd --with-freetype --with-jpeg \
-    && docker-php-ext-install gd pdo pdo_mysql
+# Install mysql client
+RUN install_packages mysql-client
 
-# Set working directory
-WORKDIR /var/www/backend
+# Copy the docker-entrypoint.sh from the backend folder
+COPY backend/docker-entrypoint.sh /app/
 
-# Copy the existing application directory contents
-COPY . /var/www/backend
+# Make the script executable
+RUN chmod +x /app/docker-entrypoint.sh
 
-# Expose port 9000
-EXPOSE 9000
-
-# Start PHP-FPM server
-CMD ["php-fpm"]
+# Set the entrypoint
+ENTRYPOINT ["/app/docker-entrypoint.sh"]

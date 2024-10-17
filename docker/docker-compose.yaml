@@ -1,66 +1,45 @@
 services:
-
-  # Laravel Backend (PHP and Nginx)
-  backend:  
-    build: 
-      context: .
-      dockerfile: Dockerfile
-    container_name: laravel-backend
-    working_dir: /var/www/backend
+  laravel:
+    container_name: laravel
+    image: bitnami/laravel:latest
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    volumes:
+      - ../backend:/app
     ports:
       - "8000:8000"
-    volumes:
-      - ../backend:/var/www/backend
-    networks:
-      - laravel
-    depends_on:
-      - mysql
-
-  # # Nginx Web Server
-  # webserver:
-  #   image: nginx:alpine
-  #   container_name: laravel-webserver
-  #   ports:
-  #     - "8080:80"
-  #   volumes:
-  #     - ../backend:/var/www/backend
-  #     - ./nginx/conf.d:/etc/nginx/conf.d
-  #   depends_on:
-  #     - backend
-  #   networks:
-  #     - laravel
-
-  # MySQL Database
-  mysql:
-    image: mysql:8.0
-    container_name: laravel-mysql
     environment:
-      MYSQL_DATABASE: kiosk
-      MYSQL_ROOT_PASSWORD: Sursee6210
-    ports:
-      - "3308:3306"
-    volumes:
-      - mysql_data:/var/lib/mysql
+      DB_HOST: mysql_db
+      DB_PORT: 3306
+      DB_DATABASE: kiosk
+      DB_USERNAME: root
+      DB_PASSWORD: Sursee6210
+    depends_on:
+      - mysql_db
     networks:
       - laravel
-  
-  # # Vite + Vue Frontend
-  # frontend:
-  #   build:
-  #     context: .
-  #     dockerfile: Dockerfile
-  #   container_name: vue-frontend
-  #   ports:
-  #     - "5000:5000"
-  #   volumes:
-  #     - ../frontend:/app
-  #   networks:
-  #     - laravel
+
+  mysql_db:
+    image: mysql:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: Sursee6210
+      MYSQL_DATABASE: kiosk
+    ports:
+      - "3307:3306"
+    networks:
+      - laravel
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    ports:
+      - "9001:80"
+    environment:
+      PMA_HOST: mysql_db
+      PMA_PORT: 3306
+    networks:
+      - laravel
 
 networks:
   laravel:
     driver: bridge
-
-volumes:
-  mysql_data:
-    driver: local
