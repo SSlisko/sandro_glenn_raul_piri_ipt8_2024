@@ -32,8 +32,8 @@ export default {
 
 <style scoped>
 .card {
-  width: 275px;
-  height: 325px;
+  width: 300px;
+  height: 220px;
   background-color: white;
   border-radius: 15px;
   overflow: hidden;
@@ -61,7 +61,7 @@ export default {
 }
 
 .card-image img {
-  width: 100%;
+  width: 100vw;
   height: 100%;
   object-fit: cover;
 }
