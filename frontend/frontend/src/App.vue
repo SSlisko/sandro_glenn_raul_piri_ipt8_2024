@@ -32,13 +32,15 @@ import { ref, onMounted } from "vue";
 import axios from "axios";
 import ProductModal from "./components/ProductModal.vue";
 import CategoryFilter from "./components/CategoryFilter.vue";
-import ProductCard from "./components/ProductCard.vue"; // Import the new card component
+import ProductCard from "./components/ProductCard.vue";
+
+alert('funktionniert');
 
 export default {
   components: {
     ProductModal,
     CategoryFilter,
-    ProductCard, // Register the card component
+    ProductCard,
   },
   setup() {
     const categories = ref([]);
