@@ -1,0 +1,14 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  background-color: #474747;
+  font-family: Arial, sans-serif;
+  padding: 8px;
+  overflow-y: auto;
+}

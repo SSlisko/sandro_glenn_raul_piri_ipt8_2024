@@ -114,20 +114,6 @@ export default {
 </script>
 
 <style scoped>
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  display: flex;
-  justify-content: center;
-  background-color: #f8f9fa;
-  font-family: Arial, sans-serif;
-  padding: 8px;
-  overflow-y: auto;
-}
 
 /* Card Container Styling */
 .card-container {
