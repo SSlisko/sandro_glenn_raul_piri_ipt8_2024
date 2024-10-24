@@ -11,7 +11,6 @@
         v-for="product in filteredProducts"
         :key="product.name"
         :product="product"
-        :addToCart="addToCart(product)"
         :openModal="() => openModal(product)"
       />
     </div>
@@ -48,7 +47,7 @@ export default {
       try {
         const response = await axios.get("http://localhost:8000/api/home");
         categories.value = response.data;
-        filterProducts(selectedCategory.value); // Use the initial selected category
+        filterProducts(selectedCategory.value);
       } catch (error) {
         console.error("Error fetching products:", error);
       }
@@ -73,17 +72,12 @@ export default {
       isModalVisible.value = false;
     };
 
-    const addToCart = (product) => {
-      console.log("Adding to cart:", product);
-    };
-
     onMounted(fetchProducts);
 
     return {
       categories,
       selectedCategory,
       filteredProducts,
-      addToCart,
       filterProducts,
       isModalVisible,
       selectedProduct,
@@ -93,7 +87,6 @@ export default {
   },
 };
 </script>
-
 
 <style scoped>
 

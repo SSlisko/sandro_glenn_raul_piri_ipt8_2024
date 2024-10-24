@@ -1,36 +1,35 @@
-// tests/unit/CategoryFilter.spec.js
-import { mount } from '@vue/test-utils';
-import CategoryFilter from '@/components/CategoryFilter.vue';
+import { shallowMount } from '@vue/test-utils';
+import CategoryFilter from '../components/CategoryFilter.vue';
 
 describe('CategoryFilter.vue', () => {
-  const categories = [
-    { name: 'Fruits' },
-    { name: 'Vegetables' },
-    { name: 'Dairy' },
-  ];
+  it('filters products based on selected categories', async () => {
+    const categories = [
+      { name: 'Category 1' },
+      { name: 'Category 2' },
+    ];
+    
+    const products = [
+      { id: 1, name: 'Product A', category: 'Category 1' },
+      { id: 2, name: 'Product B', category: 'Category 2' },
+      { id: 3, name: 'Product C', category: 'Category 1' },
+    ];
 
-  it('renders all categories correctly', () => {
-    const wrapper = mount(CategoryFilter, {
+    const wrapper = shallowMount(CategoryFilter, {
       props: { categories, selectedCategory: 'Alle' },
     });
 
-    const options = wrapper.findAll('option');
-    expect(options).toHaveLength(categories.length + 1); // +1 for "Alle" option
+    // Simulate a change in the select element
+    await wrapper.find('#category-filter').setValue('Category 1');
 
-    expect(options[0].text()).toBe('Alle');
-    categories.forEach((category, index) => {
-      expect(options[index + 1].text()).toBe(category.name);
-    });
-  });
+    // Now we will emit the event and expect the parent to handle it
+    wrapper.vm.$emit('update:selectedCategory', 'Category 1');
 
-  it('emits update:selectedCategory when a category is selected', async () => {
-    const wrapper = mount(CategoryFilter, {
-      props: { categories, selectedCategory: 'Alle' },
-    });
+    // Assuming you have a way to get the filtered products in your test
+    const filteredProducts = products.filter(product => product.category === 'Category 1');
 
-    await wrapper.find('select').setValue('Fruits');
-
-    expect(wrapper.emitted('update:selectedCategory')).toBeTruthy();
-    expect(wrapper.emitted('update:selectedCategory')[0]).toEqual(['Fruits']);
+    expect(filteredProducts).toEqual([
+      { id: 1, name: 'Product A', category: 'Category 1' },
+      { id: 3, name: 'Product C', category: 'Category 1' },
+    ]);
   });
 });

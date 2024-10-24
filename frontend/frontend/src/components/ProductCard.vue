@@ -1,5 +1,5 @@
 <template>
-  <button class="card" @click="addToCart">
+  <button class="card">
     <div class="card-image">
       <img :src="product.image" alt="product image" />
     </div>
@@ -16,10 +16,6 @@ export default {
   props: {
     product: {
       type: Object,
-      required: true,
-    },
-    addToCart: {
-      type: Function,
       required: true,
     },
     openModal: {
