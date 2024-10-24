@@ -1,5 +1,6 @@
 <template>
   <div class="filter-container">
+    <p class="logo-name">WAITR</p>
     <label for="category-filter" class="filter-label"
       >Filter nach Kategorie:</label
     >
@@ -56,6 +57,16 @@ export default {
   font-size: 1.5rem;
   font-weight: bold;
   margin-right: 15px;
+}
+
+.logo-name {
+  color: white;
+  font-size: 4vh;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+  padding-bottom: 25px;
 }
 
 #category-filter {
