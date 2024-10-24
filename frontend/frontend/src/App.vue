@@ -9,14 +9,23 @@
 
     <!-- Card Container -->
     <div class="card-container">
+      <!-- Product Cards -->
       <ProductCard
         v-for="product in filteredProducts"
         :key="product.name"
         :product="product"
-        :addToCart="addToCart(product)"
+        :addToCart="addToCart" 
         :openModal="() => openModal(product)"
       />
+       <!-- Checkout Component -->
+    <CheckOut
+      :cartItems="cart"
+      @remove-item="removeItem"
+      @remove-all="removeAll"
+      @clear-cart="clearCart"
+    />
     </div>
+    
 
     <!-- Modal for Ingredients -->
     <ProductModal
@@ -24,59 +33,86 @@
       :product="selectedProduct"
       @close="closeModal"
     />
+    
+    
+
+    
   </div>
 </template>
 
 <script>
-import { ref, onMounted } from "vue";
-import axios from "axios";
-import ProductModal from "./components/ProductModal.vue";
-import CategoryFilter from "./components/CategoryFilter.vue";
-import ProductCard from "./components/ProductCard.vue";
-
-alert('funktionniert');
+import { ref, onMounted } from 'vue'; // Consolidated import
+import axios from 'axios';
+import CheckOut from './components/CheckOut.vue';
+import ProductModal from './components/ProductModal.vue';
+import CategoryFilter from './components/CategoryFilter.vue';
+import ProductCard from './components/ProductCard.vue';
 
 export default {
   components: {
     ProductModal,
     CategoryFilter,
     ProductCard,
+    CheckOut,
   },
   setup() {
     const categories = ref([]);
-    const selectedCategory = ref("Alle");
+    const selectedCategory = ref('Alle');
     const filteredProducts = ref([]);
     const isModalVisible = ref(false);
     const selectedProduct = ref({});
+    const cart = ref([]);
+
+    // Add product to cart
+    const addToCart = (product) => {
+  const existingItem = cart.value.find(item => item.name === product.name);
+  if (existingItem) {
+    existingItem.quantity += 1;
+  } else {
+    cart.value.push({ ...product, quantity: 1 });
+  }
+};
+
+
+    // Remove one quantity of product from cart
+    const removeItem = (product) => {
+      const existingItem = cart.value.find(item => item.name === product.name);
+      if (existingItem.quantity > 1) {
+        existingItem.quantity -= 1;
+      } else {
+        cart.value = cart.value.filter(item => item.name !== product.name);
+      }
+    };
+
+    // Remove all of a specific product from cart
+    const removeAll = (product) => {
+      cart.value = cart.value.filter(item => item.name !== product.name);
+    };
+
+    // Clear the entire cart
+    const clearCart = () => {
+      cart.value = [];
+    };
 
     // Fetch categories and products from API
     const fetchProducts = async () => {
-      console.log("Fetching products from API...");
       try {
-        const response = await axios.get("http://localhost:8000/api/home");
-        console.log("API response:", response.data);
+        const response = await axios.get('http://localhost:8000/api/home');
         categories.value = response.data;
-        console.log("Categories fetched:", categories.value);
         filterProducts();
       } catch (error) {
-        console.error("Error fetching products:", error);
+        console.error('Error fetching products:', error);
       }
     };
 
     // Filter products based on selected category
     const filterProducts = () => {
-      console.log("Filtering products for category:", selectedCategory.value);
-      if (selectedCategory.value === "Alle") {
-        filteredProducts.value = categories.value.flatMap(
-          (category) => category.products,
-        );
+      if (selectedCategory.value === 'Alle') {
+        filteredProducts.value = categories.value.flatMap(category => category.products);
       } else {
-        const selectedCat = categories.value.find(
-          (category) => category.name === selectedCategory.value,
-        );
+        const selectedCat = categories.value.find(category => category.name === selectedCategory.value);
         filteredProducts.value = selectedCat ? selectedCat.products : [];
       }
-      console.log("Filtered products:", filteredProducts.value);
     };
 
     // Open modal for selected product
@@ -88,11 +124,6 @@ export default {
     // Close modal
     const closeModal = () => {
       isModalVisible.value = false;
-    };
-
-    // Add the product to the cart (implement this function as needed)
-    const addToCart = (product) => {
-      console.log("Adding to cart:", product);
     };
 
     // Fetch products when the component is mounted
@@ -108,13 +139,16 @@ export default {
       selectedProduct,
       openModal,
       closeModal,
+      cart,
+      removeItem,
+      removeAll,
+      clearCart,
     };
   },
 };
 </script>
 
 <style scoped>
-
 /* Card Container Styling */
 .card-container {
   display: flex;

@@ -17,6 +17,11 @@ export default {
       required: true,
     },
   },
+  methods: {
+    addToCart(product) {
+      this.$emit('add-to-cart', product);
+    },
+  },
 };
 </script>
 

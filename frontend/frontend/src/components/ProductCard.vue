@@ -1,5 +1,5 @@
 <template>
-  <button class="card" @click="addToCart">
+  <button class="card" @click="addToCart(product)"> <!-- Pass the product -->
     <div class="card-image">
       <img :src="product.image" alt="product image" />
     </div>
@@ -39,16 +39,13 @@ export default {
   overflow: hidden;
   color: black;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  transition:
-    transform 0.4s ease-in-out,
-    box-shadow 0.4s ease-in-out;
+  transition: transform 0.4s ease-in-out, box-shadow 0.4s ease-in-out;
   border: 1px solid #eaeaea;
   cursor: pointer;
   display: flex;
   flex-direction: column;
 }
 
-/* Slimmer Card Image Styling */
 .card-image {
   height: 120px;
   background-color: #5e5e5e;
@@ -66,7 +63,6 @@ export default {
   object-fit: cover;
 }
 
-/* Card Body Styling */
 .card-body {
   padding: 15px;
   flex: 1;
