@@ -1,13 +1,11 @@
 <template>
   <div class="container">
-    <!-- Filter Dropdown -->
     <CategoryFilter
       :categories="categories"
       :selectedCategory="selectedCategory"
       @update:selectedCategory="filterProducts"
     />
 
-    <!-- Card Container -->
     <div class="card-container">
       <ProductCard
         v-for="product in filteredProducts"
@@ -18,7 +16,6 @@
       />
     </div>
 
-    <!-- Modal for Ingredients -->
     <ProductModal
       v-if="isModalVisible"
       :product="selectedProduct"
@@ -34,8 +31,6 @@ import ProductModal from "./components/ProductModal.vue";
 import CategoryFilter from "./components/CategoryFilter.vue";
 import ProductCard from "./components/ProductCard.vue";
 
-alert('funktionniert');
-
 export default {
   components: {
     ProductModal,
@@ -49,53 +44,39 @@ export default {
     const isModalVisible = ref(false);
     const selectedProduct = ref({});
 
-    // Fetch categories and products from API
     const fetchProducts = async () => {
-      console.log("Fetching products from API...");
       try {
         const response = await axios.get("http://localhost:8000/api/home");
-        console.log("API response:", response.data);
         categories.value = response.data;
-        console.log("Categories fetched:", categories.value);
-        filterProducts();
+        filterProducts(selectedCategory.value); // Use the initial selected category
       } catch (error) {
         console.error("Error fetching products:", error);
       }
     };
 
-    // Filter products based on selected category
-    const filterProducts = () => {
-      console.log("Filtering products for category:", selectedCategory.value);
+    const filterProducts = (newCategory) => {
+      selectedCategory.value = newCategory; 
       if (selectedCategory.value === "Alle") {
-        filteredProducts.value = categories.value.flatMap(
-          (category) => category.products,
-        );
+        filteredProducts.value = categories.value.flatMap(category => category.products);
       } else {
-        const selectedCat = categories.value.find(
-          (category) => category.name === selectedCategory.value,
-        );
+        const selectedCat = categories.value.find(category => category.name === selectedCategory.value);
         filteredProducts.value = selectedCat ? selectedCat.products : [];
       }
-      console.log("Filtered products:", filteredProducts.value);
     };
 
-    // Open modal for selected product
     const openModal = (product) => {
       selectedProduct.value = product;
       isModalVisible.value = true;
     };
 
-    // Close modal
     const closeModal = () => {
       isModalVisible.value = false;
     };
 
-    // Add the product to the cart (implement this function as needed)
     const addToCart = (product) => {
       console.log("Adding to cart:", product);
     };
 
-    // Fetch products when the component is mounted
     onMounted(fetchProducts);
 
     return {
@@ -112,6 +93,7 @@ export default {
   },
 };
 </script>
+
 
 <style scoped>
 
