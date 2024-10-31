@@ -149,7 +149,6 @@ export default {
   justify-content: flex-start;
 }
 
-<<<<<<< HEAD
 .card {
   width: calc(33.33% - 20px); /* Three cards per row minus the gap */
   min-width: 250px; /* Ensures cards don’t get too narrow on smaller screens */
@@ -158,8 +157,6 @@ export default {
 
 
 /* Responsive Design */
-=======
->>>>>>> 91647487954ce4ed4380e1254d248a59e7201fbc
 @media (min-width: 1024px) {
   .card-container {
     margin-right: calc((100vw - 75vw) / 2);
