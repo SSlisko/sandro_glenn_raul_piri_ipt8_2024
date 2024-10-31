@@ -27,7 +27,6 @@ export default {
       updateCategory(event) {
       const newCategory = event.target.value;
       this.$emit("update:selectedCategory", newCategory);
-      console.log('Selected Category in Filter:', newCategory); // Debug log
     },
   },
 };

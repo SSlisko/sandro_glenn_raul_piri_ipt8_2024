@@ -62,24 +62,23 @@ export default {
       try {
         const response = await axios.get('http://localhost:8000/api/home');
         categories.value = response.data;
-        filterProducts(); // Call to filter products initially after fetching
+        filterProducts(selectedCategory.value);
       } catch (error) {
-        console.error('Error fetching products:', error);
       }
     };
 
-    const filterProducts = () => {
-      if (!categories.value.length) return; // Ensure categories are loaded
+    const filterProducts = (newCategory) => {
+      selectedCategory.value = newCategory;
+      if (!categories.value.length) return;
       if (selectedCategory.value === 'Alle') {
         filteredProducts.value = categories.value.flatMap(category => category.products);
       } else {
         const selectedCat = categories.value.find(category => category.name === selectedCategory.value);
         filteredProducts.value = selectedCat ? selectedCat.products : [];
       }
-      console.log('Current Selected Category:', selectedCategory.value);
     };
 
-    watch(selectedCategory, filterProducts); // Watch for changes in selectedCategory
+    watch(selectedCategory, filterProducts);
 
     const addToCart = (product) => {
       const existingItem = cart.value.find(item => item.name === product.name);
@@ -116,7 +115,7 @@ export default {
       isModalVisible.value = false;
     };
 
-    onMounted(fetchProducts); // Fetch products when the component is mounted
+    onMounted(fetchProducts);
 
     return {
       categories,
@@ -131,7 +130,7 @@ export default {
       removeItem,
       removeAll,
       clearCart,
-      filterProducts, // Make sure to include filterProducts here
+      filterProducts,
     };
   },
 };
