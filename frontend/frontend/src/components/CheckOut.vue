@@ -59,10 +59,10 @@ export default {
 <style scoped>
 .checkout-container {
     position: fixed; /* Fixed positioning to keep it always on the right */
-    right: 15vh; /* Align to the right edge of the viewport */
-    top: 10vh; /* Adjust top position to create space from the top */
-    width: 40vh; /* Fixed width for larger screens */
-    max-width: 20%; /* Responsive width for smaller screens */
+    right: 3vh; /* Align to the right edge of the viewport */
+    top: 22vh; /* Adjust top position to create space from the top */
+    width: 50vh; /* Fixed width for larger screens */
+    max-width: 50%; /* Responsive width for smaller screens */
     background: #f9f9f9; /* Slightly lighter background */
     padding: 20px;
     box-shadow: -2px 0 5px rgba(0, 0, 0, 0.2);
@@ -156,11 +156,31 @@ h3 {
 }
 
 /* Responsive Design Styles */
+
+@media (max-width: 1200px) {
+    .checkout-container {
+        right: 2vh; /* Adjust position for smaller screens */
+        top: 2vh; /* Keep a margin from the top */
+        padding: 20px;
+        width: 50vh; /* Increase width for smaller devices */
+    }
+}
+
+@media (max-width: 950px) {
+    .checkout-container {
+        right: 2vh; /* Adjust position for smaller screens */
+        top: 1vh; /* Keep a margin from the top */
+        padding: 2px;
+        width: 50vh; /* Increase width for smaller devices */
+    }
+}
+
 @media (max-width: 768px) {
     .checkout-container {
         right: 2vh; /* Adjust position for smaller screens */
-        top: 10vh; /* Keep a margin from the top */
-        width: 80vh; /* Increase width for smaller devices */
+        top: 1vh; /* Keep a margin from the top */
+        padding: 4px;
+        width: 70vh; /* Increase width for smaller devices */
     }
 
     h3 {
@@ -185,8 +205,8 @@ h3 {
 
 @media (max-width: 480px) {
     .checkout-container {
-        padding: 15px; /* Reduce padding for smaller screens */
-        top: 5vh; /* Increase space from the top */
+        padding: 5px; /* Reduce padding for smaller screens */
+        top: 1vh; /* Increase space from the top */
     }
 
     .action-button, .clear-cart-button, .buy-everything-button {

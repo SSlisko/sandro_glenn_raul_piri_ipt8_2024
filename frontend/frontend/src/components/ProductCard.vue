@@ -1,14 +1,14 @@
 <template>
-  <button class="card" @click="addToCart(product)"> <!-- Pass the product -->
-    <div class="card-image">
-      <img :src="product.image" alt="product image" />
-    </div>
-    <div class="card-body">
-      <h5 class="card-title">{{ product.name }}</h5>
-      <p class="card-price">{{ product.price }} CHF</p>
-      <p class="card-mehr" @click.stop="openModal">Mehr...</p>
-    </div>
-  </button>
+    <button class="card" @click="addToCart(product)"> <!-- Pass the product -->
+      <div class="card-image">
+        <img :src="product.image" alt="product image" />
+      </div>
+      <div class="card-body">
+        <h5 class="card-title">{{ product.name }}</h5>
+        <p class="card-price">{{ product.price }} CHF</p>
+        <p class="card-mehr" @click.stop="openModal">Mehr...</p>
+      </div>
+    </button>
 </template>
 
 <script>
@@ -31,7 +31,14 @@ export default {
 </script>
 
 <style scoped>
-.card {
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 20px; /* Pushes all cards below the blue header */
+  justify-content: center; /* Center-aligns cards, adjust as needed */
+}
+
+.card { 
   width: 300px;
   height: 220px;
   background-color: white;
