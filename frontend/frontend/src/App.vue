@@ -7,6 +7,7 @@
       @update:selectedCategory="filterProducts"
     />
 
+
     <!-- Card Container -->
     <div class="card-container">
       <!-- Product Cards -->
@@ -27,7 +28,7 @@
     </div>
     
 
-    <!-- Modal for Ingredients -->
+    <!-- Modal For Ingredients -->
     <ProductModal
       v-if="isModalVisible"
       :product="selectedProduct"
