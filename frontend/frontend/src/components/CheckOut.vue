@@ -59,8 +59,8 @@ export default {
 <style scoped>
 .checkout-container {
     position: fixed; /* Fixed positioning to keep it always on the right */
-    right: 3vh; /* Align to the right edge of the viewport */
-    top: 22vh; /* Adjust top position to create space from the top */
+    right: 15vh; /* Align to the right edge of the viewport */
+    top: 18vh; /* Adjust top position to create space from the top */
     width: 50vh; /* Fixed width for larger screens */
     max-width: 50%; /* Responsive width for smaller screens */
     background: #f9f9f9; /* Slightly lighter background */
@@ -157,7 +157,7 @@ h3 {
 
 /* Responsive Design Styles */
 
-@media (max-width: 1200px) {
+@media (max-width: 1320px) {
     .checkout-container {
         right: 2vh; /* Adjust position for smaller screens */
         top: 2vh; /* Keep a margin from the top */

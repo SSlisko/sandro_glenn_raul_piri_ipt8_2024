@@ -6,9 +6,8 @@
 
 body {
   display: flex;
-  justify-content: center;
   background-color: #474747;
   font-family: Arial, sans-serif;
-  padding: 8px;
+  padding: 0.2vh 0.2vw;
   overflow-y: auto;
 }

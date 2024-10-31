@@ -7,24 +7,28 @@
       @update:selectedCategory="filterProducts"
     />
 
-    <!-- Card Container -->
-    <div class="card-container">
-      <!-- Product Cards -->
-      <ProductCard
-        v-for="product in filteredProducts"
-        :key="product.name"
-        :product="product"
-        :addToCart="addToCart" 
-        :openModal="() => openModal(product)"
-      />
-      <!-- Checkout Component -->
+    <!-- Card Container and Checkout in Grid Layout -->
+    <div class="content-grid">
+      <!-- Card Container -->
+      <div class="card-container">
+        <ProductCard
+          v-for="product in filteredProducts"
+          :key="product.name"
+          :product="product"
+          :addToCart="addToCart" 
+          :openModal="() => openModal(product)"
+        />
+      </div>
+
       <CheckOut
-        :cartItems="cart"
-        @remove-item="removeItem"
-        @remove-all="removeAll"
-        @clear-cart="clearCart"
-      />
+          :cartItems="cart"
+          @remove-item="removeItem"
+          @remove-all="removeAll"
+          @clear-cart="clearCart"
+        />
     </div>
+
+
 
     <!-- Modal For Ingredients -->
     <ProductModal
@@ -137,36 +141,43 @@ export default {
 </script>
 
 <style scoped>
+.container {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+}
+
+/* Grid Layout for Card and Checkout */
+.content-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr; /* 2:1 ratio for product cards and checkout */
+  gap: 20px;
+  margin-top: 17vh; /* Space for the fixed filter container */
+  margin-left: 3vh;
+  justify-content: left;
+  align-items: left;
+}
+
+/* Card Container styling */
 .card-container {
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
-  margin-top: 20vh; /* Space for fixed filter container */
-  padding-left: 10px; /* Small gap on the left */
-  padding-right: 10px; /* Small gap on the right */
   align-items: flex-start;
   justify-content: flex-start;
 }
 
-.card {
-  width: calc(33.33% - 20px); /* Three cards per row minus the gap */
-  min-width: 250px; /* Ensures cards don’t get too narrow on smaller screens */
-  max-width: 350px; /* Sets a maximum card width */
-}
-
-
-/* Responsive Design */
-@media (min-width: 1024px) {
-  .card-container {
-    margin-right: calc((100vw - 75vw) / 2);
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+  .content-grid {
+    grid-template-columns: 1fr; /* Single column layout on smaller screens */
   }
 }
 
 @media (max-width: 768px) {
   .card-container {
-    margin-top: 40px; /* Reduced from 60px to maintain proportional spacing */
+    margin-top: 40px;
     max-width: 75vw;
-    margin-right: 0;
     justify-content: center;
   }
 }
@@ -174,7 +185,6 @@ export default {
 @media (max-width: 480px) {
   .card-container {
     max-width: 75vw;
-    margin-right: 0;
     justify-content: center;
   }
 }
