@@ -18,10 +18,6 @@ export default {
       type: Object,
       required: true,
     },
-    addToCart: {
-      type: Function,
-      required: true,
-    },
     openModal: {
       type: Function,
       required: true,

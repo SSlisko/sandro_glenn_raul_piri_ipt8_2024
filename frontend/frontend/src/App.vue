@@ -1,13 +1,11 @@
 <template>
   <div class="container">
-    <!-- Filter Dropdown -->
     <CategoryFilter
       :categories="categories"
       :selectedCategory="selectedCategory"
       @update:selectedCategory="filterProducts"
     />
 
-    <!-- Card Container -->
     <div class="card-container">
       <!-- Product Cards -->
       <ProductCard
@@ -27,16 +25,11 @@
     </div>
     
 
-    <!-- Modal for Ingredients -->
     <ProductModal
       v-if="isModalVisible"
       :product="selectedProduct"
       @close="closeModal"
     />
-    
-    
-
-    
   </div>
 </template>
 
@@ -94,7 +87,6 @@ export default {
       cart.value = [];
     };
 
-    // Fetch categories and products from API
     const fetchProducts = async () => {
       try {
         const response = await axios.get('http://localhost:8000/api/home');
@@ -115,13 +107,11 @@ export default {
       }
     };
 
-    // Open modal for selected product
     const openModal = (product) => {
       selectedProduct.value = product;
       isModalVisible.value = true;
     };
 
-    // Close modal
     const closeModal = () => {
       isModalVisible.value = false;
     };
@@ -133,7 +123,6 @@ export default {
       categories,
       selectedCategory,
       filteredProducts,
-      addToCart,
       filterProducts,
       isModalVisible,
       selectedProduct,
