@@ -45,10 +45,14 @@ export default {
 
 <style scoped>
 .filter-container {
-  margin-bottom: 20px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%; /* Make it full width */
+  z-index: 1000; /* Keep it above other elements */
   padding: 20px;
   background-color: #007bff;
-  border-radius: 10px;
+  border-radius: 0 0 10px 10px; /* Only round bottom corners */
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 

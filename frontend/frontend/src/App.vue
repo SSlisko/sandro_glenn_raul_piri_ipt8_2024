@@ -155,11 +155,19 @@ export default {
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
-  padding: 20px;
-  max-width: 75vw;
-  margin-top: 20px;
+  margin-top: 20vh; /* Space for fixed filter container */
+  padding-left: 10px; /* Small gap on the left */
+  padding-right: 10px; /* Small gap on the right */
   align-items: flex-start;
+  justify-content: flex-start;
 }
+
+.card {
+  width: calc(33.33% - 20px); /* Three cards per row minus the gap */
+  min-width: 250px; /* Ensures cards don’t get too narrow on smaller screens */
+  max-width: 350px; /* Sets a maximum card width */
+}
+
 
 /* Responsive Design */
 @media (min-width: 1024px) {
@@ -170,7 +178,7 @@ export default {
 
 @media (max-width: 768px) {
   .card-container {
-    margin-top: 60px;
+    margin-top: 40px; /* Reduced from 60px to maintain proportional spacing */
     max-width: 75vw;
     margin-right: 0;
     justify-content: center;
