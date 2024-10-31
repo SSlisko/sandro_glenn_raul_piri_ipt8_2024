@@ -7,7 +7,6 @@
       @update:selectedCategory="filterProducts"
     />
 
-
     <!-- Card Container -->
     <div class="card-container">
       <!-- Product Cards -->
@@ -18,15 +17,14 @@
         :addToCart="addToCart" 
         :openModal="() => openModal(product)"
       />
-       <!-- Checkout Component -->
-    <CheckOut
-      :cartItems="cart"
-      @remove-item="removeItem"
-      @remove-all="removeAll"
-      @clear-cart="clearCart"
-    />
+      <!-- Checkout Component -->
+      <CheckOut
+        :cartItems="cart"
+        @remove-item="removeItem"
+        @remove-all="removeAll"
+        @clear-cart="clearCart"
+      />
     </div>
-    
 
     <!-- Modal For Ingredients -->
     <ProductModal
@@ -34,15 +32,11 @@
       :product="selectedProduct"
       @close="closeModal"
     />
-    
-    
-
-    
   </div>
 </template>
 
 <script>
-import { ref, onMounted } from 'vue'; // Consolidated import
+import { ref, onMounted, watch } from 'vue';
 import axios from 'axios';
 import CheckOut from './components/CheckOut.vue';
 import ProductModal from './components/ProductModal.vue';
@@ -64,18 +58,38 @@ export default {
     const selectedProduct = ref({});
     const cart = ref([]);
 
-    // Add product to cart
+    const fetchProducts = async () => {
+      try {
+        const response = await axios.get('http://localhost:8000/api/home');
+        categories.value = response.data;
+        filterProducts(); // Call to filter products initially after fetching
+      } catch (error) {
+        console.error('Error fetching products:', error);
+      }
+    };
+
+    const filterProducts = () => {
+      if (!categories.value.length) return; // Ensure categories are loaded
+      if (selectedCategory.value === 'Alle') {
+        filteredProducts.value = categories.value.flatMap(category => category.products);
+      } else {
+        const selectedCat = categories.value.find(category => category.name === selectedCategory.value);
+        filteredProducts.value = selectedCat ? selectedCat.products : [];
+      }
+      console.log('Current Selected Category:', selectedCategory.value);
+    };
+
+    watch(selectedCategory, filterProducts); // Watch for changes in selectedCategory
+
     const addToCart = (product) => {
-  const existingItem = cart.value.find(item => item.name === product.name);
-  if (existingItem) {
-    existingItem.quantity += 1;
-  } else {
-    cart.value.push({ ...product, quantity: 1 });
-  }
-};
+      const existingItem = cart.value.find(item => item.name === product.name);
+      if (existingItem) {
+        existingItem.quantity += 1;
+      } else {
+        cart.value.push({ ...product, quantity: 1 });
+      }
+    };
 
-
-    // Remove one quantity of product from cart
     const removeItem = (product) => {
       const existingItem = cart.value.find(item => item.name === product.name);
       if (existingItem.quantity > 1) {
@@ -85,57 +99,30 @@ export default {
       }
     };
 
-    // Remove all of a specific product from cart
     const removeAll = (product) => {
       cart.value = cart.value.filter(item => item.name !== product.name);
     };
 
-    // Clear the entire cart
     const clearCart = () => {
       cart.value = [];
     };
 
-    // Fetch categories and products from API
-    const fetchProducts = async () => {
-      try {
-        const response = await axios.get('http://localhost:8000/api/home');
-        categories.value = response.data;
-        filterProducts();
-      } catch (error) {
-        console.error('Error fetching products:', error);
-      }
-    };
-
-    // Filter products based on selected category
-    const filterProducts = () => {
-      if (selectedCategory.value === 'Alle') {
-        filteredProducts.value = categories.value.flatMap(category => category.products);
-      } else {
-        const selectedCat = categories.value.find(category => category.name === selectedCategory.value);
-        filteredProducts.value = selectedCat ? selectedCat.products : [];
-      }
-    };
-
-    // Open modal for selected product
     const openModal = (product) => {
       selectedProduct.value = product;
       isModalVisible.value = true;
     };
 
-    // Close modal
     const closeModal = () => {
       isModalVisible.value = false;
     };
 
-    // Fetch products when the component is mounted
-    onMounted(fetchProducts);
+    onMounted(fetchProducts); // Fetch products when the component is mounted
 
     return {
       categories,
       selectedCategory,
       filteredProducts,
       addToCart,
-      filterProducts,
       isModalVisible,
       selectedProduct,
       openModal,
@@ -144,13 +131,13 @@ export default {
       removeItem,
       removeAll,
       clearCart,
+      filterProducts, // Make sure to include filterProducts here
     };
   },
 };
 </script>
 
 <style scoped>
-/* Card Container Styling */
 .card-container {
   display: flex;
   flex-wrap: wrap;
@@ -162,6 +149,7 @@ export default {
   justify-content: flex-start;
 }
 
+<<<<<<< HEAD
 .card {
   width: calc(33.33% - 20px); /* Three cards per row minus the gap */
   min-width: 250px; /* Ensures cards don’t get too narrow on smaller screens */
@@ -170,6 +158,8 @@ export default {
 
 
 /* Responsive Design */
+=======
+>>>>>>> 91647487954ce4ed4380e1254d248a59e7201fbc
 @media (min-width: 1024px) {
   .card-container {
     margin-right: calc((100vw - 75vw) / 2);
