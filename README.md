@@ -11,9 +11,9 @@
 - PHP
 - Laravel
 - HTML/CSS
-- MongoDB
+- ~~MongoDB~~
 - MySQL
-- MSSQL
+- ~~MSSQL~~
 
 ## Konzept und Planung
 
