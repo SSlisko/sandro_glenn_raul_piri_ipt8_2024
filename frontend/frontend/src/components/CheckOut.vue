@@ -17,6 +17,11 @@
             </li>
         </ul>
         <p v-else>Your cart is empty.</p>
+        
+        <div v-if="cartItems.length > 0" class="total-cost">
+            <span>Total: {{ roundToTwoDecimals(totalCost) }} CHF</span>
+        </div>
+        
         <div class="button-container">
             <button v-if="cartItems.length > 0" @click="clearCart" class="clear-cart-button">
                 <i class="fas fa-trash"></i> Clear Cart
@@ -28,12 +33,21 @@
     </div>
 </template>
 
+
 <script>
 export default {
     props: {
         cartItems: {
             type: Array,
             required: true,
+        },
+    },
+    computed: {
+        // Compute the total cost
+        totalCost() {
+            return this.cartItems.reduce((total, item) => {
+                return total + (item.price * item.quantity);
+            }, 0);
         },
     },
     methods: {
@@ -73,6 +87,13 @@ export default {
     font-family: 'Arial', sans-serif; /* Change font */
     z-index: 1000; /* Ensure it appears above other elements */
     transition: width 0.3s ease; /* Smooth transition for width changes */
+}
+
+.total-cost {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-top: 10px;
+    text-align: right;
 }
 
 h3 {
