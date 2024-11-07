@@ -55,6 +55,7 @@ export default {
 
 .logo-name {
   color: white;
+  font-family: 'candara', sans-serif;
   font-size: 4vh;
   font-weight: bold;
   text-transform: uppercase;
