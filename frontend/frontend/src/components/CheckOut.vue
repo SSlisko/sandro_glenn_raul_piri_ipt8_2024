@@ -43,7 +43,6 @@ export default {
         },
     },
     computed: {
-        // Compute the total cost
         totalCost() {
             return this.cartItems.reduce((total, item) => {
                 return total + (item.price * item.quantity);
