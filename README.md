@@ -21,7 +21,7 @@ Das Projekt wird eine einfache Kiosk App sein, entwickelt mit Vue.js für das Fr
 
 ## ER-Diagramm Datenbank
 
-![ER-Diagramm]("./img/ERM.png")
+![ER-Diagramm]("img/ERM.png")
 
 
 ## Lokales Setup
